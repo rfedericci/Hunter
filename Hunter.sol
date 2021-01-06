@@ -4,7 +4,7 @@ pragma solidity ^0.7.5;
 //import "../Openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
-//contract Hunter is ERC20
+//contract Hunter is ERC20 - For the ICO deploying
 contract Hunter
 {
     uint TimeCreation = block.timestamp;
@@ -14,13 +14,13 @@ contract Hunter
     address[] public list_hunters;
     //uint public maggot =  address(this).balance;
     bytes32[] answers = [keccak256(abi.encode("start")),
-    keccak256(abi.encode("Reponse1")), //Will be the answer of the 1st enigma
-    keccak256(abi.encode("Reponse2")), //Will be the answer of the 2nd enigma
-    keccak256(abi.encode("Reponse3")), //Will be the answer of the 3rd enigma
-    keccak256(abi.encode("Reponse4")), //Will be the answer of the 4th enigma
-    keccak256(abi.encode("Reponse5"))]; //Will be the answer of the 5th enigma
+    keccak256(abi.encode("Reponse1")),
+    keccak256(abi.encode("Reponse2")),
+    keccak256(abi.encode("Reponse3")),
+    keccak256(abi.encode("Reponse4")),
+    keccak256(abi.encode("Reponse5"))];
    
-    //constructor() payable public ERC20("HunterCoin", "HTC")
+    //constructor() payable public ERC20("HunterCoin", "HTC") - For the ICO deploying
     constructor() payable public
     {
         Keeper = msg.sender;
@@ -47,13 +47,13 @@ contract Hunter
    
     modifier isnotenought()
     {
-    require(msg.value >= 0.01 ether); //Amount to pay to be registered as hunter
+    require(msg.value >= 0.01 ether);
     _;
     }
    
     modifier needtowait()
     {
-    require(block.timestamp - Timer_Hunters[msg.sender] >= 43200); //One anwser can be subimitted every 12hours
+    require(block.timestamp - Timer_Hunters[msg.sender] >= 43200);
     _;
     }
    
@@ -83,7 +83,8 @@ contract Hunter
         bytes32 hash = keccak256(abi.encode(mystring));
         bytes32 right_answer = answers[Clues_Hunters[msg.sender]];
         if (hash == right_answer){Clues_Hunters[msg.sender] += 1;}
-        if (Clues_Hunters[msg.sender] == 6){msg.sender.transfer(address(this).balance);} //Once the 5th enigma is resolbed the total amounf of ether is transfered to the hunter
+        if (Clues_Hunters[msg.sender] == 6){msg.sender.transfer(address(this).balance);}
+
     }
    
     function balance() public view returns(uint)
